@@ -1,0 +1,2353 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/30km_1.js"></script>
+        <script src="data/LITOLOGIA_2.js"></script>
+        <script src="data/SEGMENTOS_3.js"></script>
+        <script src="data/ESTACAS_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:3
+        }).fitBounds([[-3.518423693088358,-46.17361120657506],[-2.9160482996696615,-45.067345086522934]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 3,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_30km_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LAYER'] !== null ? autolinker.link(feature.properties['LAYER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SEG 4A1'] !== null ? autolinker.link(feature.properties['SEG 4A1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['A00'] !== null ? autolinker.link(feature.properties['A00'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['A01'] !== null ? autolinker.link(feature.properties['A01'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['A02'] !== null ? autolinker.link(feature.properties['A02'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['A03'] !== null ? autolinker.link(feature.properties['A03'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_30km_1_0() {
+            return {
+                pane: 'pane_30km_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_30km_1');
+        map.getPane('pane_30km_1').style.zIndex = 401;
+        map.getPane('pane_30km_1').style['mix-blend-mode'] = 'normal';
+        var layer_30km_1 = new L.geoJson(json_30km_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_30km_1',
+            layerName: 'layer_30km_1',
+            pane: 'pane_30km_1',
+            onEachFeature: pop_30km_1,
+            style: style_30km_1_0,
+        });
+        bounds_group.addLayer(layer_30km_1);
+        map.addLayer(layer_30km_1);
+        function pop_LITOLOGIA_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COD_UNI_ES</th>\
+                        <td>' + (feature.properties['COD_UNI_ES'] !== null ? autolinker.link(feature.properties['COD_UNI_ES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SIGLA_UNID</th>\
+                        <td>' + (feature.properties['SIGLA_UNID'] !== null ? autolinker.link(feature.properties['SIGLA_UNID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SIGLAS_ANT</th>\
+                        <td>' + (feature.properties['SIGLAS_ANT'] !== null ? autolinker.link(feature.properties['SIGLAS_ANT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOME_UNIDA</th>\
+                        <td>' + (feature.properties['NOME_UNIDA'] !== null ? autolinker.link(feature.properties['NOME_UNIDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">HIERARQUIA</th>\
+                        <td>' + (feature.properties['HIERARQUIA'] !== null ? autolinker.link(feature.properties['HIERARQUIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">IDADE_MAX</th>\
+                        <td>' + (feature.properties['IDADE_MAX'] !== null ? autolinker.link(feature.properties['IDADE_MAX'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ERRO_MAX</th>\
+                        <td>' + (feature.properties['ERRO_MAX'] !== null ? autolinker.link(feature.properties['ERRO_MAX'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EON_IDAD_M</th>\
+                        <td>' + (feature.properties['EON_IDAD_M'] !== null ? autolinker.link(feature.properties['EON_IDAD_M'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ERA_MAXIMA</th>\
+                        <td>' + (feature.properties['ERA_MAXIMA'] !== null ? autolinker.link(feature.properties['ERA_MAXIMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PERIODO_MA</th>\
+                        <td>' + (feature.properties['PERIODO_MA'] !== null ? autolinker.link(feature.properties['PERIODO_MA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EPOCA_MAX</th>\
+                        <td>' + (feature.properties['EPOCA_MAX'] !== null ? autolinker.link(feature.properties['EPOCA_MAX'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SISTEMA_GE</th>\
+                        <td>' + (feature.properties['SISTEMA_GE'] !== null ? autolinker.link(feature.properties['SISTEMA_GE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">METODO_GEO</th>\
+                        <td>' + (feature.properties['METODO_GEO'] !== null ? autolinker.link(feature.properties['METODO_GEO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">QLDE_INFER</th>\
+                        <td>' + (feature.properties['QLDE_INFER'] !== null ? autolinker.link(feature.properties['QLDE_INFER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">IDADE_MIN</th>\
+                        <td>' + (feature.properties['IDADE_MIN'] !== null ? autolinker.link(feature.properties['IDADE_MIN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ERRO_MIN</th>\
+                        <td>' + (feature.properties['ERRO_MIN'] !== null ? autolinker.link(feature.properties['ERRO_MIN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EON_IDAD_1</th>\
+                        <td>' + (feature.properties['EON_IDAD_1'] !== null ? autolinker.link(feature.properties['EON_IDAD_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ERA_MINIMA</th>\
+                        <td>' + (feature.properties['ERA_MINIMA'] !== null ? autolinker.link(feature.properties['ERA_MINIMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PERIODO_MI</th>\
+                        <td>' + (feature.properties['PERIODO_MI'] !== null ? autolinker.link(feature.properties['PERIODO_MI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EPOCA_MIN</th>\
+                        <td>' + (feature.properties['EPOCA_MIN'] !== null ? autolinker.link(feature.properties['EPOCA_MIN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SISTEMA__1</th>\
+                        <td>' + (feature.properties['SISTEMA__1'] !== null ? autolinker.link(feature.properties['SISTEMA__1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">METODO_G_1</th>\
+                        <td>' + (feature.properties['METODO_G_1'] !== null ? autolinker.link(feature.properties['METODO_G_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">QLDE_INF_1</th>\
+                        <td>' + (feature.properties['QLDE_INF_1'] !== null ? autolinker.link(feature.properties['QLDE_INF_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AMBSEDIMEN</th>\
+                        <td>' + (feature.properties['AMBSEDIMEN'] !== null ? autolinker.link(feature.properties['AMBSEDIMEN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SISTSEDIME</th>\
+                        <td>' + (feature.properties['SISTSEDIME'] !== null ? autolinker.link(feature.properties['SISTSEDIME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO_DEPOS</th>\
+                        <td>' + (feature.properties['TIPO_DEPOS'] !== null ? autolinker.link(feature.properties['TIPO_DEPOS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ASSOC_MAGM</th>\
+                        <td>' + (feature.properties['ASSOC_MAGM'] !== null ? autolinker.link(feature.properties['ASSOC_MAGM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NIVEL_CRUS</th>\
+                        <td>' + (feature.properties['NIVEL_CRUS'] !== null ? autolinker.link(feature.properties['NIVEL_CRUS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TEXTURA_IG</th>\
+                        <td>' + (feature.properties['TEXTURA_IG'] !== null ? autolinker.link(feature.properties['TEXTURA_IG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FONTE_MAGM</th>\
+                        <td>' + (feature.properties['FONTE_MAGM'] !== null ? autolinker.link(feature.properties['FONTE_MAGM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MORFOLOGIA</th>\
+                        <td>' + (feature.properties['MORFOLOGIA'] !== null ? autolinker.link(feature.properties['MORFOLOGIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AMBIENTE_T</th>\
+                        <td>' + (feature.properties['AMBIENTE_T'] !== null ? autolinker.link(feature.properties['AMBIENTE_T'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">METAMORFIS</th>\
+                        <td>' + (feature.properties['METAMORFIS'] !== null ? autolinker.link(feature.properties['METAMORFIS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">METODO_G_2</th>\
+                        <td>' + (feature.properties['METODO_G_2'] !== null ? autolinker.link(feature.properties['METODO_G_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TEMP_PICO</th>\
+                        <td>' + (feature.properties['TEMP_PICO'] !== null ? autolinker.link(feature.properties['TEMP_PICO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ERRO_TEMP_</th>\
+                        <td>' + (feature.properties['ERRO_TEMP_'] !== null ? autolinker.link(feature.properties['ERRO_TEMP_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PRESSAO_PI</th>\
+                        <td>' + (feature.properties['PRESSAO_PI'] !== null ? autolinker.link(feature.properties['PRESSAO_PI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ERRO_PRESS</th>\
+                        <td>' + (feature.properties['ERRO_PRESS'] !== null ? autolinker.link(feature.properties['ERRO_PRESS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO_BARIC</th>\
+                        <td>' + (feature.properties['TIPO_BARIC'] !== null ? autolinker.link(feature.properties['TIPO_BARIC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TRAJETORIA</th>\
+                        <td>' + (feature.properties['TRAJETORIA'] !== null ? autolinker.link(feature.properties['TRAJETORIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LITOTIPO1</th>\
+                        <td>' + (feature.properties['LITOTIPO1'] !== null ? autolinker.link(feature.properties['LITOTIPO1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LITOTIPO2</th>\
+                        <td>' + (feature.properties['LITOTIPO2'] !== null ? autolinker.link(feature.properties['LITOTIPO2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLASSE_ROC</th>\
+                        <td>' + (feature.properties['CLASSE_ROC'] !== null ? autolinker.link(feature.properties['CLASSE_ROC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLASSE_R_1</th>\
+                        <td>' + (feature.properties['CLASSE_R_1'] !== null ? autolinker.link(feature.properties['CLASSE_R_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BB_SUBCLAS</th>\
+                        <td>' + (feature.properties['BB_SUBCLAS'] !== null ? autolinker.link(feature.properties['BB_SUBCLAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BB_SUBCL_1</th>\
+                        <td>' + (feature.properties['BB_SUBCL_1'] !== null ? autolinker.link(feature.properties['BB_SUBCL_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LITOLOGIA_2_0(feature) {
+            switch(String(feature.properties['SIGLA_UNID'])) {
+                case 'K12it':
+                    return {
+                pane: 'pane_LITOLOGIA_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,175,1,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Qfl':
+                    return {
+                pane: 'pane_LITOLOGIA_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(57,255,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ssg':
+                    return {
+                pane: 'pane_LITOLOGIA_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,103,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_LITOLOGIA_2');
+        map.getPane('pane_LITOLOGIA_2').style.zIndex = 402;
+        map.getPane('pane_LITOLOGIA_2').style['mix-blend-mode'] = 'normal';
+        var layer_LITOLOGIA_2 = new L.geoJson(json_LITOLOGIA_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LITOLOGIA_2',
+            layerName: 'layer_LITOLOGIA_2',
+            pane: 'pane_LITOLOGIA_2',
+            onEachFeature: pop_LITOLOGIA_2,
+            style: style_LITOLOGIA_2_0,
+        });
+        bounds_group.addLayer(layer_LITOLOGIA_2);
+        map.addLayer(layer_LITOLOGIA_2);
+        function pop_SEGMENTOS_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SEG 4A1</th>\
+                        <td>' + (feature.properties['SEG 4A1'] !== null ? autolinker.link(feature.properties['SEG 4A1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">km_ini</th>\
+                        <td>' + (feature.properties['km_ini'] !== null ? autolinker.link(feature.properties['km_ini'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">km_fim</th>\
+                        <td>' + (feature.properties['km_fim'] !== null ? autolinker.link(feature.properties['km_fim'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extensao</th>\
+                        <td>' + (feature.properties['extensao'] !== null ? autolinker.link(feature.properties['extensao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SEGMENTOS_3_0(feature) {
+            switch(String(feature.properties['SEG 4A1'])) {
+                case '1':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13D':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13E':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '15A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '15B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '15C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '17':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '18':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '19':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '20':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '21':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '22':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '23':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '24':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '25A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '25B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '25C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '26A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '26B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '26C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '27A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '27B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '28A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '28B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '29':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '30':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '31':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '32':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '33A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '33B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '33C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '34A1':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '34A2':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '34B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '35A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '35B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '36':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '37A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '37B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '37C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '38A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '38B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '38C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '39':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '40':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '41A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '41B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '42A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '42B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '42C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'C1':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'C2':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        function style_SEGMENTOS_3_1(feature) {
+            switch(String(feature.properties['SEG 4A1'])) {
+                case '1':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13D':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13E':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '15A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '15B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '15C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '17':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '18':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '19':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '20':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '21':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '22':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '23':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '24':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '25A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '25B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '25C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '26A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '26B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '26C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '27A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '27B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '28A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '28B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '29':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '30':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '31':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '32':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '33A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '33B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '33C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '34A1':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '34A2':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '34B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '35A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '35B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '36':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '37A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '37B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '37C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '38A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '38B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '38C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '39':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '40':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '41A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '41B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '42A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '42B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '42C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5A':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5B':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5C':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'C1':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'C2':
+                    return {
+                pane: 'pane_SEGMENTOS_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_SEGMENTOS_3');
+        map.getPane('pane_SEGMENTOS_3').style.zIndex = 403;
+        map.getPane('pane_SEGMENTOS_3').style['mix-blend-mode'] = 'normal';
+        var layer_SEGMENTOS_3 = new L.geoJson.multiStyle(json_SEGMENTOS_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SEGMENTOS_3',
+            layerName: 'layer_SEGMENTOS_3',
+            pane: 'pane_SEGMENTOS_3',
+            onEachFeature: pop_SEGMENTOS_3,
+            styles: [style_SEGMENTOS_3_0,style_SEGMENTOS_3_1,]
+        });
+        bounds_group.addLayer(layer_SEGMENTOS_3);
+        map.addLayer(layer_SEGMENTOS_3);
+        function pop_ESTACAS_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Estaca</th>\
+                        <td>' + (feature.properties['Estaca'] !== null ? autolinker.link(feature.properties['Estaca'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ESTACAS_4_0() {
+            return {
+                pane: 'pane_ESTACAS_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,235,235,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ESTACAS_4');
+        map.getPane('pane_ESTACAS_4').style.zIndex = 404;
+        map.getPane('pane_ESTACAS_4').style['mix-blend-mode'] = 'normal';
+        var layer_ESTACAS_4 = new L.geoJson(json_ESTACAS_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ESTACAS_4',
+            layerName: 'layer_ESTACAS_4',
+            pane: 'pane_ESTACAS_4',
+            onEachFeature: pop_ESTACAS_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ESTACAS_4_0(feature));
+            },
+        });
+        var cluster_ESTACAS_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_ESTACAS_4.addLayer(layer_ESTACAS_4);
+
+        bounds_group.addLayer(layer_ESTACAS_4);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ESTACAS_4.png" /> ESTACAS': cluster_ESTACAS_4,'SEGMENTOS<br /><table><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_101.png" /></td><td>10</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_112.png" /></td><td>11</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_123.png" /></td><td>12</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_13A4.png" /></td><td>13A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_13B5.png" /></td><td>13B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_13C6.png" /></td><td>13C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_13D7.png" /></td><td>13D</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_13E8.png" /></td><td>13E</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_149.png" /></td><td>14</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_15A10.png" /></td><td>15A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_15B11.png" /></td><td>15B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_15C12.png" /></td><td>15C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_1613.png" /></td><td>16</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_1714.png" /></td><td>17</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_1815.png" /></td><td>18</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_1916.png" /></td><td>19</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2017.png" /></td><td>20</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2118.png" /></td><td>21</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2219.png" /></td><td>22</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2320.png" /></td><td>23</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2421.png" /></td><td>24</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_25A22.png" /></td><td>25A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_25B23.png" /></td><td>25B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_25C24.png" /></td><td>25C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_26A25.png" /></td><td>26A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_26B26.png" /></td><td>26B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_26C27.png" /></td><td>26C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_27A28.png" /></td><td>27A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_27B29.png" /></td><td>27B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_28A30.png" /></td><td>28A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_28B31.png" /></td><td>28B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2932.png" /></td><td>29</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2A33.png" /></td><td>2A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_2B34.png" /></td><td>2B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_335.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_3036.png" /></td><td>30</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_3137.png" /></td><td>31</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_3238.png" /></td><td>32</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_33A39.png" /></td><td>33A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_33B40.png" /></td><td>33B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_33C41.png" /></td><td>33C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_34A142.png" /></td><td>34A1</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_34A243.png" /></td><td>34A2</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_34B44.png" /></td><td>34B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_35A45.png" /></td><td>35A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_35B46.png" /></td><td>35B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_3647.png" /></td><td>36</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_37A48.png" /></td><td>37A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_37B49.png" /></td><td>37B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_37C50.png" /></td><td>37C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_38A51.png" /></td><td>38A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_38B52.png" /></td><td>38B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_38C53.png" /></td><td>38C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_3954.png" /></td><td>39</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_455.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_4056.png" /></td><td>40</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_41A57.png" /></td><td>41A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_41B58.png" /></td><td>41B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_42A59.png" /></td><td>42A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_42B60.png" /></td><td>42B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_42C61.png" /></td><td>42C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_5A62.png" /></td><td>5A</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_5B63.png" /></td><td>5B</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_5C64.png" /></td><td>5C</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_665.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_766.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_867.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_968.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_C169.png" /></td><td>C1</td></tr><tr><td style="text-align: center;"><img src="legend/SEGMENTOS_3_C270.png" /></td><td>C2</td></tr></table>': layer_SEGMENTOS_3,'LITOLOGIA<br /><table><tr><td style="text-align: center;"><img src="legend/LITOLOGIA_2_K12it0.png" /></td><td>K12it</td></tr><tr><td style="text-align: center;"><img src="legend/LITOLOGIA_2_Qfl1.png" /></td><td>Qfl</td></tr><tr><td style="text-align: center;"><img src="legend/LITOLOGIA_2_Ssg2.png" /></td><td>Ssg</td></tr></table>': layer_LITOLOGIA_2,'<img src="legend/30km_1.png" /> 30km': layer_30km_1,"OSM Standard": layer_OSMStandard_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_ESTACAS_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Estaca'] !== null?String('<div style="color: #000000; font-size: 9pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Estaca']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ESTACAS_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_SEGMENTOS_3,layer_ESTACAS_4]);
+        map.on("zoomend", function(){
+            resetLabels([layer_SEGMENTOS_3,layer_ESTACAS_4]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_SEGMENTOS_3,layer_ESTACAS_4]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_SEGMENTOS_3,layer_ESTACAS_4]);
+        });
+        </script>
+    </body>
+</html>
